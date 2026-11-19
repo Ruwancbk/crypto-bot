@@ -15,6 +15,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Unzip project if it was uploaded as a zip
+        run: |
+          if [ ! -f settings.gradle.kts ] && [ -f crypto-bot.zip ]; then
+            unzip -q crypto-bot.zip -d project
+            echo "Extracted crypto-bot.zip into ./project"
+          fi
+
       - name: Find Gradle project folder
         id: proj
         run: |
